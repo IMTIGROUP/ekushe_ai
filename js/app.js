@@ -17,6 +17,17 @@ async function register() {
     const result =
         document.getElementById("result");
 
+    const { data, error } =
+        await client.auth.signUp({
+            email: email,
+            password: password
+        });
+
+    if(error){
+        result.innerText = error.message;
+        return;
+    }
+
     result.innerText =
-        "Connecting to Supabase...";
+        "User created successfully";
 }
