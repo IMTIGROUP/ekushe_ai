@@ -1,4 +1,4 @@
-function register() {
+async function register() {
 
     const email =
         document.getElementById("email").value;
@@ -10,7 +10,5 @@ function register() {
         document.getElementById("result");
 
     result.innerText =
-        "Email: " + email +
-        " | Password Length: " +
-        password.length;
+        "Connecting to Supabase...";
 }
