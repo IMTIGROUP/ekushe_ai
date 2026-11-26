@@ -1,4 +1,12 @@
-function register() {
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function register() {
 
     const email =
         document.getElementById("email").value;
@@ -6,14 +14,18 @@ function register() {
     const password =
         document.getElementById("password").value;
 
-    if(email === "" || password === "") {
+    const { data, error } =
+        await supabaseClient.auth.signUp({
+            email,
+            password
+        });
 
+    if(error){
         document.getElementById("result").innerText =
-        "Fill all fields";
-
+        error.message;
         return;
     }
 
     document.getElementById("result").innerText =
-    "Account ready for: " + email;
+    "Registration successful. Check your email.";
 }
