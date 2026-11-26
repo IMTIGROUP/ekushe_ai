@@ -1,6 +1,19 @@
 function register() {
-    const email = document.getElementById("email").value;
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    if(email === "" || password === "") {
+
+        document.getElementById("result").innerText =
+        "Fill all fields";
+
+        return;
+    }
 
     document.getElementById("result").innerText =
-        "Registration request for: " + email;
+    "Account ready for: " + email;
 }
