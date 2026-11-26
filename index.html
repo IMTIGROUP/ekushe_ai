@@ -15,9 +15,14 @@
 
 <button onclick="register()">Register</button>
 
+<p id="result"></p>
+
 <script>
 function register() {
-  alert("Register button works");
+  const email = document.getElementById("email").value;
+
+  document.getElementById("result").innerText =
+    "Registration request for: " + email;
 }
 </script>
 
