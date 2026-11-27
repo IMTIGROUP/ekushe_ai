@@ -31,3 +31,30 @@ async function register() {
     result.innerText =
         "Registration successful. Check your email.";
 }
+
+
+
+async function login() {
+
+    const email =
+        document.getElementById("loginEmail").value;
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    const result =
+        document.getElementById("loginResult");
+
+    const { data, error } =
+        await client.auth.signInWithPassword({
+            email,
+            password
+        });
+
+    if (error) {
+        result.innerText = error.message;
+        return;
+    }
+
+    result.innerText = "Login successful";
+}
