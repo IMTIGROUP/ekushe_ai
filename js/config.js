@@ -1,4 +1,4 @@
 const CONFIG = {
-  supabaseUrl: "YOUR_SUPABASE_URL",
-  supabaseKey: "YOUR_SUPABASE_PUBLISHABLE_KEY"
+  supabaseUrl: "https://kqdoubgbzdxmrxbdgoci.supabase.co",
+  supabaseKey: "sb_publishable_sw-BaQ0Fz1lPG_WKomzonQ_MbkjnONZ"
 };
