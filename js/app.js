@@ -71,3 +71,23 @@ async function logout() {
 
     window.location.href = "../index.html";
 }
+
+
+
+async function checkUser() {
+
+    const {
+        data: { user }
+    } = await client.auth.getUser();
+
+    if (!user) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    document.getElementById("userInfo").innerText =
+        user.email;
+}
