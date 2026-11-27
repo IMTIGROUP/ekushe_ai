@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
 
+<body onload="checkUser()">
+    
 <nav>
     <a href="../index.html">Home</a> |
     <a href="login.html">Login</a> |
@@ -16,7 +17,7 @@
 <hr>
 
 <h1>Dashboard</h1>
-
+<p id="userInfo"></p>
 <p>Welcome to Ekushe AI</p>
 
 <button onclick="logout()">
