@@ -36,11 +36,6 @@ async function register() {
 
 async function login() {
 
-    result.innerText = "Login successful";
-
-window.location.href =
-    "dashboard.html";
-
     const email =
         document.getElementById("loginEmail").value;
 
@@ -60,6 +55,11 @@ window.location.href =
         result.innerText = error.message;
         return;
     }
+
+    result.innerText = "Login successful";
+
+    window.location.href = "dashboard.html";
+}
 
     result.innerText = "Login successful";
 }
