@@ -1,3 +1,11 @@
+const SUPABASE_URL = "তোমার_supabase_url";
+const SUPABASE_KEY = "তোমার_publishable_key";
+
+const client = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
 async function register() {
 
     const email =
@@ -9,6 +17,17 @@ async function register() {
     const result =
         document.getElementById("result");
 
+    const { data, error } =
+        await client.auth.signUp({
+            email,
+            password
+        });
+
+    if (error) {
+        result.innerText = error.message;
+        return;
+    }
+
     result.innerText =
-        "Connecting to Supabase...";
+        "Registration successful. Check your email.";
 }
