@@ -62,3 +62,12 @@ async function login() {
 
     window.location.href = "dashboard.html";
 }
+
+
+
+async function logout() {
+
+    await client.auth.signOut();
+
+    window.location.href = "../index.html";
+}
