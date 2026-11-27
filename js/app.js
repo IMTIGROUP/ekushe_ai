@@ -36,6 +36,11 @@ async function register() {
 
 async function login() {
 
+    result.innerText = "Login successful";
+
+window.location.href =
+    "dashboard.html";
+
     const email =
         document.getElementById("loginEmail").value;
 
