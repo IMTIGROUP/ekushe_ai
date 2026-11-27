@@ -58,8 +58,7 @@ async function login() {
 
     result.innerText = "Login successful";
 
-    window.location.href = "dashboard.html";
-}
+    alert("Login Success");
 
-    result.innerText = "Login successful";
+    window.location.href = "dashboard.html";
 }
