@@ -6,6 +6,7 @@ const client = window.supabase.createClient(
     SUPABASE_KEY
 );
 
+// REGISTER
 async function register() {
 
     const email =
@@ -17,7 +18,7 @@ async function register() {
     const result =
         document.getElementById("result");
 
-    const { data, error } =
+    const { error } =
         await client.auth.signUp({
             email,
             password
@@ -32,8 +33,7 @@ async function register() {
         "Registration successful. Check your email.";
 }
 
-
-
+// LOGIN
 async function login() {
 
     const email =
@@ -45,7 +45,7 @@ async function login() {
     const result =
         document.getElementById("loginResult");
 
-    const { data, error } =
+    const { error } =
         await client.auth.signInWithPassword({
             email,
             password
@@ -56,15 +56,10 @@ async function login() {
         return;
     }
 
-    result.innerText = "Login successful";
-
-    alert("Login Success");
-
     window.location.href = "dashboard.html";
 }
 
-
-
+// LOGOUT
 async function logout() {
 
     await client.auth.signOut();
@@ -72,8 +67,7 @@ async function logout() {
     window.location.href = "../index.html";
 }
 
-
-
+// PROTECT DASHBOARD
 async function checkUser() {
 
     const {
@@ -82,7 +76,9 @@ async function checkUser() {
 
     if (!user) {
 
-        window.location.href = "login.html";
+        window.location.href =
+            "login.html";
+
         return;
     }
 
@@ -91,31 +87,76 @@ async function checkUser() {
 
     document.getElementById("dashboard").style.display =
         "block";
+
+    loadMessages();
 }
 
+// SEND MESSAGE
+async function sendMessage() {
 
-
-function sendMessage() {
+    const {
+        data: { user }
+    } = await client.auth.getUser();
 
     const input =
         document.getElementById("message");
 
+    const text =
+        input.value.trim();
+
+    if (!text) return;
+
+    const { error } =
+        await client
+        .from("messages")
+        .insert([
+            {
+                user_email: user.email,
+                message: text
+            }
+        ]);
+
+    if (!error) {
+        input.value = "";
+        loadMessages();
+    }
+}
+
+// LOAD CHAT HISTORY
+async function loadMessages() {
+
+    const {
+        data: { user }
+    } = await client.auth.getUser();
+
     const chatBox =
         document.getElementById("chatBox");
 
-    const text =
-        input.value;
+    if (!chatBox) return;
 
-    if(text === "") return;
+    const { data, error } =
+        await client
+        .from("messages")
+        .select("*")
+        .eq("user_email", user.email)
+        .order("created_at", {
+            ascending: true
+        });
 
-    const div =
-        document.createElement("div");
+    if (error) return;
 
-    div.className = "message";
+    chatBox.innerHTML = "";
 
-    div.innerText = text;
+    data.forEach(msg => {
 
-    chatBox.appendChild(div);
+        const div =
+            document.createElement("div");
 
-    input.value = "";
+        div.className = "message";
+
+        div.innerText =
+            msg.message;
+
+        chatBox.appendChild(div);
+    });
 }
