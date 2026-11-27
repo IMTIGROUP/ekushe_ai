@@ -82,12 +82,13 @@ async function checkUser() {
 
     if (!user) {
 
-        window.location.href =
-            "login.html";
-
+        window.location.href = "login.html";
         return;
     }
 
     document.getElementById("userInfo").innerText =
         user.email;
+
+    document.getElementById("dashboard").style.display =
+        "block";
 }
