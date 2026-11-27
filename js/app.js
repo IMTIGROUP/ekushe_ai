@@ -92,3 +92,30 @@ async function checkUser() {
     document.getElementById("dashboard").style.display =
         "block";
 }
+
+
+
+function sendMessage() {
+
+    const input =
+        document.getElementById("message");
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    const text =
+        input.value;
+
+    if(text === "") return;
+
+    const div =
+        document.createElement("div");
+
+    div.className = "message";
+
+    div.innerText = text;
+
+    chatBox.appendChild(div);
+
+    input.value = "";
+}
